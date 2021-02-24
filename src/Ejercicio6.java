@@ -6,6 +6,7 @@ public class Ejercicio6 {
         System.out.println(trim("       hola         "));
         System.out.println(ltrim( "        hola"));
         System.out.println(rtrim("hola         "));
+        System.out.println(indexOfN("John|Paul|George|Ringo",'|',2));
     }
     // Retorna una cadena compuesta por n caracteres c
     // Ejemplo: replicate('x',5) ==> 'xxxxx'
@@ -62,17 +63,27 @@ public class Ejercicio6 {
         }
         return ret.toString();
     }
-/*
+
     public static int indexOfN(String s,char c,int n){
         HashMap<Map<Character, Integer>,Integer> posisicones= new HashMap<Map<Character, Integer>, Integer>();
-
-        for(int j=0; j<s.length();j++){
-
-
-        }
+        int cont=0;
+        int pos=0;
+       if (s.indexOf(c)!=-1){
+           for(int j=0; j<s.length();j++){
+               if(s.charAt(j)==c){
+                   cont++;
+                   if (cont==n){
+                       pos=j;
+                   }
+               }
+           }
+       }
+       else
+           pos=-1;
+       return pos;
     }
 
- */
+
 
 
 }

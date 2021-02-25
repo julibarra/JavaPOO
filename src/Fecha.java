@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Fecha {
@@ -47,7 +48,37 @@ public class Fecha {
     public void setFecha(GregorianCalendar fecha) {
         this.fecha = fecha;
     }
+    public boolean isValid() {
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
 
+        if(mes > 12 || dia > 31 || anio < 0 || mes < 1 || dia < 1) {
+            return false;
+        }
+
+        if(dia == 31 && ((mes % 2 == 0 && mes < 7) || (mes % 2 == 1 && mes > 7))) {
+            return false;
+        }
+
+        if(dia == 30 && mes == 2){
+            return false;
+        }
+
+        if(dia == 29 && mes == 2 && !gregorianCalendar.isLeapYear(anio)){
+            return false;
+        }
+
+        return true;
+    }
+
+    public void nextDay() {
+        if(isValid()){
+            GregorianCalendar gregorianCalendar = new GregorianCalendar(anio, mes - 1, dia);
+            gregorianCalendar.add(Calendar.DAY_OF_MONTH, 1);
+            this.dia = gregorianCalendar.get(Calendar.DAY_OF_MONTH);
+            this.mes = gregorianCalendar.get(Calendar.MONTH) + 1;
+            this.anio = gregorianCalendar.get(Calendar.YEAR);
+        }
+    }
     @Override
     public String toString() {
         return "Fecha{" +
